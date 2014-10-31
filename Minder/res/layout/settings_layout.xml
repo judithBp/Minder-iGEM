@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:background="@color/blue" >
+        
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/minder_menu"
+            android:clickable="false"
+            android:visibility="invisible" />
+        
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_minder" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout 
+            android:id="@+id/settings_lightbulb_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" >
+            <ImageView 
+                android:id="@+id/settings_lightbulb"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    
+   <LinearLayout
+        android:id="@+id/settings_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        
+        <Spinner
+            android:id="@+id/settings_language"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/dark_grey"
+            android:background="@color/grey"
+            android:contentDescription="Preferred language to filter ideas" />
+        
+         <MultiAutoCompleteTextView
+	            android:id="@+id/settings_tags"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:minHeight="60dp"
+                android:inputType="text"
+                android:singleLine="true"
+                android:text="#"
+                android:hint="Add tags to filter ideas"
+                android:imeOptions="actionDone"
+                android:selectAllOnFocus="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textColor="@color/dark_grey"
+                android:textColorHint="@color/light_grey"
+                android:textColorHighlight="@color/blue"
+                android:background="@color/white" >
+	        </MultiAutoCompleteTextView>
+        </LinearLayout>
+      <RelativeLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" >
+	      <Button
+            android:id="@+id/settings_btn_save"
+            
+	            android:layout_width="35dp"
+	            android:layout_height="35dp"
+	            android:layout_marginTop="15dp"
+	            android:layout_marginBottom="15dp"
+	            android:layout_marginRight="15dp"
+	            android:layout_alignParentRight="true"
+	            android:background="@drawable/minder_ok"
+	            android:text=""
+            android:onClick="save" />
+	         
+	        </RelativeLayout>
+	        
+     
+</LinearLayout>
