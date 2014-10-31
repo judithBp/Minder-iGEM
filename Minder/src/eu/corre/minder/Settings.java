@@ -38,6 +38,8 @@ public class Settings extends FragmentActivity implements
 	private Spinner languageSpinner;
 	private MultiAutoCompleteTextView tagsText;
 	private Button btnSave;
+	private RelativeLayout deleteAccountLayout;
+	private Button deleteAccount;
 
 	private LinearLayout contentLayout;
 	private RelativeLayout lightbulbLayout;
@@ -63,6 +65,8 @@ public class Settings extends FragmentActivity implements
 				"get all tags");
 		tagsText.addTextChangedListener(this);
 		btnSave = (Button) findViewById(R.id.settings_btn_save);
+		deleteAccount = (Button) findViewById(R.id.settings_delete_account);
+		deleteAccountLayout = (RelativeLayout) findViewById(R.id.settings_delete_account_layout);
 
 		contentLayout = (LinearLayout) findViewById(R.id.settings_content);
 		lightbulbLayout = (RelativeLayout) findViewById(R.id.settings_lightbulb_layout);
@@ -149,8 +153,14 @@ public class Settings extends FragmentActivity implements
 		GeneralSettings.refresh = true;
 
 		contentLayout.setVisibility(View.GONE);
+		deleteAccountLayout.setVisibility(View.GONE);
 		lightbulbLayout.setVisibility(View.VISIBLE);
 		lightbulbAnimation.start();
+	}
+	
+	public void deleteAccount(View v) {
+		super.onBackPressed();
+		GeneralSettings.deleteAccount = true;
 	}
 
 	@Override
@@ -196,6 +206,7 @@ public class Settings extends FragmentActivity implements
 			lightbulbAnimation.stop();
 			lightbulbLayout.setVisibility(View.GONE);
 			contentLayout.setVisibility(View.VISIBLE);
+			deleteAccountLayout.setVisibility(View.VISIBLE);
 			setText();
 		} else if (requestContext.equals("update table language")) {
 			super.onBackPressed();

@@ -1,10 +1,15 @@
 package eu.corre.minder;
 
+import java.util.ArrayList;
+
 import eu.corre.minder.R;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
@@ -19,7 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public class Login extends Activity implements OnClickListener,
-		ConnectionCallbacks, OnConnectionFailedListener {
+		ConnectionCallbacks, OnConnectionFailedListener, EnablesServerRequest, ResultCallback<Status> {
 	private static final String TAG = "LoginActivity";
 	private static final int RC_SIGN_IN = 0;
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -130,7 +135,15 @@ public class Login extends Activity implements OnClickListener,
 				getIntent().removeExtra("logout");
 				startActivity(getIntent());
 			}
-		} else {
+		}
+		else if(extras != null && extras.getBoolean("delete") == true) {
+			if(googleApiClient.isConnected()) {
+				Plus.AccountApi.clearDefaultAccount(googleApiClient);
+				Plus.AccountApi.revokeAccessAndDisconnect(googleApiClient)
+					.setResultCallback(this);
+			}
+		}
+		else {
 			accountName = Plus.AccountApi.getAccountName(googleApiClient);
 			GeneralSettings.email = accountName;
 			if (Plus.PeopleApi.getCurrentPerson(googleApiClient) != null) {
@@ -166,5 +179,21 @@ public class Login extends Activity implements OnClickListener,
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void handleRequestResult(ArrayList<Object[]> result,
+			String requestContext) {
+		finish();
+		getIntent().removeExtra("delete");
+		startActivity(getIntent());
+	}
+
+	@Override
+	public void onResult(Status arg0) {
+		new ServerRequestTask(this).execute("delete from users where id='" + GeneralSettings.userID + "'", 
+			"delete from ideas where user_id='" + GeneralSettings.userID + "'", 
+			"delete from rated_ideas where user_id='" + GeneralSettings.userID + "'",
+			"delete from tags_users where id='" + GeneralSettings.userID + "'", "update table");
 	}
 }

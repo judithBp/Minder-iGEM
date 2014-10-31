@@ -136,9 +136,14 @@ public class HomepageFragmentLayout extends Fragment implements
 	public void onResume() {
 		super.onResume();
 		if (newIdea || GeneralSettings.refresh) {
-			getIdea();
-			GeneralSettings.refresh = false;
-			newIdea = false;
+			if(!GeneralSettings.deleteAccount) {
+				getIdea();
+				GeneralSettings.refresh = false;
+				newIdea = false;
+			}
+			else {
+				GeneralSettings.deleteAccount = false;
+			}
 		}
 	}
 

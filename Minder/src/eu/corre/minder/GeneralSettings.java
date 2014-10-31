@@ -2,7 +2,7 @@ package eu.corre.minder;
 
 public class GeneralSettings {
 
-	public static String SENDER_ID = "Your sender ID";
+	public static String SENDER_ID = "893319302071";
 	public static String[] languages = { "English", "Francais", "Deutsch",
 			"Espanol" };
 	public static boolean logout = false;
@@ -13,4 +13,5 @@ public class GeneralSettings {
 	public static boolean tags;
 	public static String[] tagsArray = new String[0];
 	public static boolean refresh;
+	public static boolean deleteAccount = false;
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="@color/white" >
 
     <RelativeLayout
+        android:id="@+id/settings_actionbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:gravity="left"
         android:background="@color/blue" >
         
@@ -35,6 +36,7 @@
             android:id="@+id/settings_lightbulb_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/settings_actionbar_layout"
             android:visibility="visible" >
             <ImageView 
                 android:id="@+id/settings_lightbulb"
@@ -48,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_below="@id/settings_actionbar_layout"
         android:visibility="gone" >
         
         <Spinner
@@ -95,7 +98,24 @@
 	            android:text=""
             android:onClick="save" />
 	         
-	        </RelativeLayout>
+	  </RelativeLayout>
 	        
+      <RelativeLayout 
+          android:id="@+id/settings_delete_account_layout"
+          android:layout_width="match_parent"
+          android:layout_height="65dp"
+          android:layout_alignParentBottom="true"
+          android:background="@color/grey"
+          android:visibility="gone" >
+          <Button 
+              android:id="@+id/settings_delete_account"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:text="Delete Account"
+              android:background="@color/grey"
+              android:textColor="@color/blue"
+              android:onClick="deleteAccount" />
+      </RelativeLayout>
      
-</LinearLayout>
+</RelativeLayout>

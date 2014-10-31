@@ -81,6 +81,21 @@ public class Homepage extends FragmentActivity implements
 		}
 	}
 
+	private void deleteAccount() {
+		mIntent = new Intent(this, Login.class);
+		mIntent.putExtra("delete", true);
+		startActivity(mIntent);
+		finish();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(GeneralSettings.deleteAccount == true) {
+			deleteAccount();
+		}
+	}
+	
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
